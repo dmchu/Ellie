@@ -23,11 +23,21 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual('Welcome Admin', welcome_txt)
 
     def test_invalid_password(self):
-        pass
+        driver = self.driver
+        driver.find_element_by_id('txtUsername').send_keys('admin')
+        driver.find_element_by_id('txtPassword').send_keys('password')
+        driver.find_element_by_id('btnLogin').click()
+        error_msg = driver.find_element_by_id('spanMessage').text
+        self.assertEqual('Invalid credentials',error_msg)
 
 
     def test_empty_password(self):
-        pass
+        driver = self.driver
+        driver.find_element_by_id('txtUsername').send_keys('admin')
+        driver.find_element_by_id('txtPassword').send_keys('')
+        driver.find_element_by_id('btnLogin').click()
+        error_msg = driver.find_element_by_id('spanMessage').text
+        self.assertEqual('Password cannot be empty',error_msg)
 
 if __name__ == '__main__':
     unittest.main()
