@@ -3,7 +3,10 @@ from random import randint
 from time import sleep
 
 from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.select import Select
+from selenium.webdriver.support.wait import WebDriverWait
 
 
 class AddEmployee(unittest.TestCase):
@@ -11,7 +14,7 @@ class AddEmployee(unittest.TestCase):
     def setUp(self):
         self.driver = webdriver.Chrome()
         self.driver.get('http://hrm.seleniumminutes.com')
-
+        self.wait = WebDriverWait(self.driver,10)
 
     def test_something(self):
         empId = randint(1000000,9999999)
@@ -22,15 +25,18 @@ class AddEmployee(unittest.TestCase):
 
         # Login
         driver = self.driver
+        wait = self.wait
         driver.find_element_by_id('txtUsername').send_keys('admin')
         driver.find_element_by_id('txtPassword').send_keys('Password')
         driver.find_element_by_id('btnLogin').click()
-        sleep(2)
+        logo = (By.CSS_SELECTOR, "#branding img")
+        wait.until(expected_conditions.presence_of_element_located(logo))
         welcome_txt=driver.find_element_by_id('welcome').text
         # Expected value vs actual value
         self.assertEqual('Welcome Admin', welcome_txt)
         driver.find_element_by_link_text('PIM').click()
-        sleep(2)
+        add_btn = (By.CSS_SELECTOR, "#btnAdd")
+        wait.until(expected_conditions.presence_of_element_located(add_btn))
         # Click the add buttom
         # TODO BY: May need to rerurn and do 'something'
         driver.find_element_by_id('btnAdd').click()
@@ -50,14 +56,20 @@ class AddEmployee(unittest.TestCase):
         left_menu_item = driver.find_element_by_id('sidenav')
         left_menu_item.find_element_by_link_text('Job').click()
         driver.find_element_by_id('btnSave').click()
+
         Select(driver.find_element_by_id('job_job_title')).select_by_visible_text(job_title)
         Select(driver.find_element_by_id('job_emp_status')).select_by_visible_text(employment_status)
         driver.find_element_by_id('btnSave').click()
-        sleep(2)
+
+        locator = (By.CSS_SELECTOR,".message.success")
+        wait.until(expected_conditions.presence_of_element_located(locator))
+
         # Go to PIM page
         # TODO BY: May need to rerurn and do 'something' as well :P
         driver.find_element_by_id('menu_pim_viewPimModule').click()
-        sleep(2)
+
+        serch_form = (By.CSS_SELECTOR, "#employee-information  h1")
+        wait.until(expected_conditions.presence_of_element_located(serch_form))
 
         # Search by empId
         driver.find_element_by_id('empsearch_id').send_keys(empId)
@@ -77,7 +89,6 @@ class AddEmployee(unittest.TestCase):
         # Expected: 1 record back
         lst = driver.find_elements_by_xpath('//td[4]/a')
         self.assertTrue(len(lst)==1)
-        sleep(2)
 
         # delete employee
 
