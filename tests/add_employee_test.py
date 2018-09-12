@@ -29,8 +29,8 @@ class AddEmployee(unittest.TestCase):
         driver.find_element_by_id('txtUsername').send_keys('admin')
         driver.find_element_by_id('txtPassword').send_keys('Password')
         driver.find_element_by_id('btnLogin').click()
-        logo = (By.CSS_SELECTOR, "#branding img")
-        wait.until(expected_conditions.presence_of_element_located(logo))
+        locator_welcome = (By.CSS_SELECTOR, '#welcome')
+        wait.until(expected_conditions.presence_of_element_located(locator_welcome))
         welcome_txt=driver.find_element_by_id('welcome').text
         # Expected value vs actual value
         self.assertEqual('Welcome Admin', welcome_txt)
