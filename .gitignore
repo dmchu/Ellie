@@ -2,3 +2,4 @@
 .DS_Store
 venv
 browser_drivers
+__init__.py
