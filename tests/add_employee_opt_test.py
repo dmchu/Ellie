@@ -1,6 +1,5 @@
 import unittest
 from random import randint
-from time import sleep
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -8,7 +7,7 @@ from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.wait import WebDriverWait
 
-from steps.common import login, welcome_message_method
+from steps.common import login, welcome_message_method, logout
 
 
 class AddEmployee(unittest.TestCase):
@@ -98,8 +97,7 @@ class AddEmployee(unittest.TestCase):
         self.assertTrue(len(lst)==1)
 
         # logout
-        driver.find_element_by_id('welcome').click()
-        wait.until(expected_conditions.visibility_of_element_located((By.LINK_TEXT, 'Logout'))).click()
+        logout(driver)
 
         # login with new credentials
         login(driver,new_user_name,new_password)
@@ -109,9 +107,7 @@ class AddEmployee(unittest.TestCase):
         self.assertEqual('Welcome {}'.format(first_name), welcome_txt)
 
         # logout
-        driver.find_element_by_id('welcome').click()
-        wait.until(expected_conditions.visibility_of_element_located((By.LINK_TEXT, 'Logout'))).click()
-
+        logout(driver)
 
     def tearDown(self):
         self.driver.quit()
