@@ -1,6 +1,11 @@
-class LoginPage():
-    def __init__(self,driver):
-        self.driver = driver
+from pages.base_page import BasePage
+
+
+class LoginPage(BasePage):
+
+    def __init__(self, driver):
+        super(LoginPage, self).__init__(driver)
+        self.page_url = 'http://hrm.seleniumminutes.com/symfony/web/index.php/auth/login'
 
 
     def login(self, username='admin', password='Password'):

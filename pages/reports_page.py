@@ -1,14 +1,22 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions
-from selenium.webdriver.support.wait import WebDriverWait
+from pages.base_page import BasePage
 
-class ReportsPage():
+locators = {
+    'add_button': (By.ID, "btnAdd"),
+    'search_textfield': (By.ID, "search_search"),
+    'search_button': (By.CLASS_NAME, "searchBtn"),
+    'delete_button': (By.ID, "btnDelete"),
+    'dialog_delete_button': (By.ID, "dialogDeleteBtn")
+}
+
+class ReportsPage(BasePage):
     def __init__(self,driver):
-        self.driver = driver
-        self.wait = WebDriverWait(self.driver, 10)
+        super(ReportsPage, self).__init__(driver)
+        page_url = '/symfony/web/index.php/core/viewDefinedPredefinedReports/reportGroup/3/reportType/PIM_DEFINED'
 
     def add_report(self):
-        self.driver.find_element(By.ID, "btnAdd").click()
+        self.driver.find_element(locators['add_button'][0],locators['add_button'][1]).click()
 
     def search(self, report_name):
         self.wait.until(expected_conditions.visibility_of_element_located((By.ID, "search_search"))).send_keys(report_name)
