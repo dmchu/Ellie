@@ -2,8 +2,10 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC, expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait as wait
 
+from fixtures.params import DEFAULT_PASSWORD
 
-def login(driver, username = 'admin', password = 'Password'):
+
+def login(driver, username = 'admin', password = DEFAULT_PASSWORD):
     driver.find_element_by_id('txtUsername').send_keys(username)
     driver.find_element_by_id('txtPassword').send_keys(password)
     driver.find_element_by_id('btnLogin').click()
