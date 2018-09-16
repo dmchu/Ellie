@@ -1,14 +1,9 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions
-from selenium.webdriver.support.wait import WebDriverWait
 
-class ReportsPage():
     def __init__(self,driver):
-        self.driver = driver
-        self.wait = WebDriverWait(self.driver, 10)
 
     def add_report(self):
-        self.driver.find_element(By.ID, "btnAdd").click()
 
     def search(self, report_name):
         self.wait.until(expected_conditions.visibility_of_element_located((By.ID, "search_search"))).send_keys(report_name)

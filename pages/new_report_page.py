@@ -1,12 +1,8 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions
-from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support.select import Select
 
-class NewReportPage():
     def __init__(self,driver):
-        self.driver = driver
-        self.wait = WebDriverWait(self.driver, 10)
 
     def set_report_name(self, report_name):
         self.wait.until(expected_conditions.presence_of_element_located((By.ID, 'report_report_name'))).send_keys(

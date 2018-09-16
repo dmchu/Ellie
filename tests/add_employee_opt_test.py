@@ -17,7 +17,6 @@ class AddEmployee(unittest.TestCase):
         self.driver.get('http://hrm.seleniumminutes.com')
         self.wait = WebDriverWait(self.driver,10)
 
-    def test_something(self):
         empId = randint(1000000,9999999)
         first_name = "Taras"
         last_name = "Bulba"
