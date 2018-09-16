@@ -1,15 +1,13 @@
 import unittest
 from random import randint
 from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 from pages.login_page import LoginPage
+from pages.logout_page import LogoutPage
 from pages.new_report_page import NewReportPage
 from pages.pim_page import PimPage
 from pages.report_run_page import ReportRunPage
 from pages.reports_page import ReportsPage
-from pages.logout_page import LogoutPage
 
 
 class ReportCreate(unittest.TestCase):
