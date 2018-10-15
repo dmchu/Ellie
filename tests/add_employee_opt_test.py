@@ -13,7 +13,8 @@ from steps.common import login, welcome_message_method, logout
 class AddEmployee(unittest.TestCase):
 
     def setUp(self):
-        self.driver = webdriver.Chrome()
+        self.driver = webdriver.Chrome(desired_capabilities={"chromeOptions":{"args":["--start-fullscreen"]}})
+        print(self.driver.capabilities)
         self.driver.get('http://hrm.seleniumminutes.com')
         self.wait = WebDriverWait(self.driver,10)
 
