@@ -4,7 +4,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 
 
-class LeftMenu(unittest.TestCase):
+class Stikers(unittest.TestCase):
 
     def setUp(self):
         # self.driver = webdriver.Chrome()

@@ -41,12 +41,3 @@ class LeftMenu(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
-
-
-    def test_stikers(driver):
-        driver.get("http://localhost/litecart")
-        goods = driver.find_elements_by_class_name('name')
-        for good in goods:
-            sticker_numbers = len(good.find_elements_by_xpath(".//../div/div"))
-            assertTrue(sticker_numbers == 1, "Number of stickers is not one!")
-            assertTrue(good.find_element_by_xpath(".//../div/div").is_displayed(), "Sticker is not displayed!")
